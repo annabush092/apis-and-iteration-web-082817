@@ -19,11 +19,13 @@ def get_character_hash(character)
     end
     #if the character name does not show up on the current page, check the next pages.
     #if the character name does not appear on any pages (there is no "next"), report the issue.
-    unless character_hash["next"]==nil
-      character_hash = request_and_parse(character_hash["next"])
-    else
-      puts "Sorry, there is no character #{character}."
-      return {}
+    if my_character_hash == nil
+      unless (character_hash["next"]==nil)
+        character_hash = request_and_parse(character_hash["next"])
+      else
+        puts "Sorry, there is no character #{character}."
+        return {}
+      end
     end
   end
   my_character_hash
