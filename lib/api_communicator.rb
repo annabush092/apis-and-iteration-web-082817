@@ -14,13 +14,16 @@ def get_character_hash(character)
   character_hash = request_and_parse
   my_character_hash = nil
   while !my_character_hash do
+    if character == "exit"
+      exit
+    end
     my_character_hash = character_hash["results"].find do |my_char_hash|
       my_char_hash["name"].downcase == character
     end
     #if the character name does not show up on the current page, check the next pages.
     #if the character name does not appear on any pages (there is no "next"), report the issue.
-    if my_character_hash == nil
-      unless (character_hash["next"]==nil)
+    if my_character_hash==nil
+      unless character_hash["next"]==nil
         character_hash = request_and_parse(character_hash["next"])
       else
         puts "Sorry, there is no character #{character}."
