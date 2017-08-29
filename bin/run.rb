@@ -5,4 +5,7 @@ require_relative "../lib/command_line_interface.rb"
 
 welcome
 character = get_character_from_user
-show_character_movies(character)
+while character.downcase != "exit"
+  show_character_movies(character)
+  character = get_character_from_user
+end
